@@ -51,7 +51,7 @@ function getTotal(cup: number, topping: number, marshmallow?: number): number {
     return cup + topping + marshmallow;
 }
 
-const button = document.querySelector("#button");
+const button: Element = document.querySelector("#button");
 
 button.addEventListener("click", () => {
     let total: number = (getTotal(getCup(), getTopping(), getMarshmallow()));
