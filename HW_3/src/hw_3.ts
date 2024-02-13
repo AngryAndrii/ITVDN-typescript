@@ -13,18 +13,51 @@ console.log(matiz.showModel());
 // для отримання чи запису використовуємо get set реалізації доступу.
 // використовуємо модифікатори доступу на власний розсуд  public private protected.
 // підсумок - словник термінів отримує різні типи даних та виводить результат
-class Dictionary<Tkey, Tvalue, Tdescr> {
+class KeyValyeDescription<Tkey, Tvalue, Tdescr> {
     // прватне значення ключа
     private _key: Tkey;
     // присвоїти значення ключа сеттер.
-    public set key(value: Tkey) {
-        if (!value) {
-            throw new Error("value can not be empty!")
+    public set key(val: Tkey) {
+        if (!val) {
+            throw new Error("Key value can not be empty!")
         }
-        this._key = value;
+        this._key = val;
     }
     // Взяти значення ключа геттер.
     public get key(): Tkey {
         return this._key;
     }
+    // прватне значення визначення
+    private _value: Tvalue;
+    // присвоїти значення визначення сеттер.
+    public set value(val: Tvalue) {
+        if (!val) {
+            throw new Error("value cant not be empty")
+        }
+        this._value = val;
+    }
+    // Взяти значення визначення геттер.
+    public get value(): Tvalue {
+        return this._value;
+    }
+        // захищене значення опису
+    protected _descr: Tdescr;
+    // присвоїти значення опису сеттер.
+    public set descr(val: Tdescr) {
+        if (!val) {
+            throw new Error("value cant not be empty")
+        }
+        this._descr = val;
+    }
+    // Взяти значення опису геттер.
+    public get descr(): Tdescr {
+        return this._descr;
+    }
 }
+
+const firstString = new KeyValyeDescription<number, boolean, string>();
+firstString.key = 1;
+firstString.value = true;
+firstString.descr = 'it is first string with value and key and description';
+
+class Dictionary
