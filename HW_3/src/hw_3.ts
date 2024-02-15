@@ -1,14 +1,5 @@
 // Створіть словник власних визначень, використовуючи Generic function. В середині повинні бути визначення для трьох властивостей – ключ, значення, опис (різних типів даних). Для отримання чи запису використовуйте get/set реалізації доступу. Також для полів необхідно використовувати модифікатори доступу (на ваш розсуд). В підсумку повинний вийти словник термінів, отримуючи у вхідний параметр різні типи даних для реалізації.
-class Car<T> {
-    constructor(public model: T){  }
-    public showModel(): T {
-        return this.model;
-    }
-}
-const lanos = new Car<string>('daewoo lanos');
-console.log(lanos.showModel())
-const matiz = new Car<boolean>(true);
-console.log(matiz.showModel());
+
 // ключ значення опис - різних типів данних
 // для отримання чи запису використовуємо get set реалізації доступу.
 // використовуємо модифікатори доступу на власний розсуд  public private protected.
@@ -55,9 +46,26 @@ class KeyValyeDescription<Tkey, Tvalue, Tdescr> {
     }
 }
 
-const firstString = new KeyValyeDescription<number, boolean, string>();
-firstString.key = 1;
-firstString.value = true;
-firstString.descr = 'it is first string with value and key and description';
+class Dictionary<Tkey, Tvalue, Tdescr> {
+    private data: KeyValyeDescription<Tkey, Tvalue, Tdescr>[] = [];
+    public add(key: Tkey, value: Tvalue, descr: Tdescr) {
+        const entry = new KeyValyeDescription<Tkey, Tvalue, Tdescr>();
+        entry.key = key;
+        entry.value = value;
+        entry.descr = descr;
+        this.data.push(entry);
+    }
 
-class Dictionary
+    public getValue(key: Tkey): string | null {
+        const entry = this.data.find(item => item.key == key);
+        const all = `${entry.value} - ${entry.descr}`
+        return entry ? all : null;
+    }
+}
+
+const dictionary = new Dictionary<number, string, string>();
+dictionary.add(1, 'hello', 'привіт');
+dictionary.add(2, 'apple', 'яблуко');
+dictionary.add(3, 'phone', 'телефон');
+
+console.log(dictionary.getValue(3));
